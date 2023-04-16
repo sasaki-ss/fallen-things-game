@@ -4,10 +4,15 @@
 #include <DxLib.h>
 #include <string>
 
-extern void ErrorExit(std::string msg = "") {
-	MessageBox(NULL, msg.c_str(), TEXT("error"), MB_ICONINFORMATION);
-	DxLib_End();
-	exit(EXIT_FAILURE);
-}
+class ErrorProc final {
+public:
+	static void ErrorExit(std::string msg = "") {
+		MessageBox(NULL, msg.c_str(), TEXT("error"), MB_ICONINFORMATION);
+		DxLib_End();
+		exit(EXIT_FAILURE);
+	}
+};
+
+
 
 #endif // !G_ERRORPROC_H

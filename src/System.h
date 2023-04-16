@@ -1,13 +1,17 @@
 #ifndef G_SYSTEM_H
 #define G_SYSTEM_H
 
-#include "Vector2.h"
 #include <string>
+#include "ISceneCreate.h"
+#include "Vector2.h"
+
+class SceneManager;
 
 class System final {
 private:
 	Vector2 _windowPos;
 	std::string _windowTitle;
+	SceneManager* _sceneMgr;
 public:
 	bool init();
 	void run();
@@ -15,6 +19,8 @@ public:
 
 	void setWindowPos(Vector2 pos) { _windowPos = pos; }
 	void setWindowTitle(std::string name) { _windowTitle = name; }
+	void setSceneSystem(std::string defSceneName, ISceneCreate* defSceneCreate);
+	void setSceneCreate(std::string sceneName, ISceneCreate* sceneCreate);
 };
 
 #endif // !G_SYSTEM_H

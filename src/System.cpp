@@ -1,6 +1,8 @@
 #include "System.h"
 
 #include <DxLib.h>
+#include "ErrorProc.h"
+#include "SceneManager.h"
 
 bool System::init() {
 	//FreeConsole();
@@ -26,6 +28,9 @@ void System::run() {
 		//‰æ–Ê‚ðƒNƒŠƒA
 		ClearDrawScreen();
 
+		_sceneMgr->update();
+		_sceneMgr->draw();
+
 		//— ‰æ–Ê‚ð”½‰f‚³‚¹‚é
 		ScreenFlip();
 	}
@@ -33,4 +38,15 @@ void System::run() {
 
 void System::end() {
 	DxLib_End();
+}
+
+void System::setSceneSystem(std::string defSceneName, ISceneCreate* defSceneCreate) {
+	_sceneMgr = new SceneManager();
+	setSceneCreate(defSceneName, defSceneCreate);
+	_sceneMgr->changeScene(defSceneName);
+	if (!_sceneMgr->init())ErrorProc::ErrorExit("Initialization of SceneManager failed.");
+}
+
+void System::setSceneCreate(std::string sceneName, ISceneCreate* sceneCreate) {
+	_sceneMgr->setSceneCreate(sceneName, sceneCreate);
 }
