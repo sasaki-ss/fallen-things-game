@@ -39,9 +39,9 @@ void SceneManager::changeScene(std::string sceneName, bool isBack, bool isStack)
 
 	auto it = _sceneCreate.find(sceneName);
 	if (_sceneCreate.end() == it) {
-		ErrorExit("error scene exist.");
+		ErrorProc::ErrorExit("error scene exist.");
 	}
 
 	_scenes.push(_sceneCreate[sceneName]->createScene());
-	if (!_scenes.top()->init())ErrorExit("error scene exist.");
+	if (!_scenes.top()->init())ErrorProc::ErrorExit("error scene exist.");
 }
