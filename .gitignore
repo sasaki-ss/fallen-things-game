@@ -34,3 +34,4 @@
 *.sln
 *.vcxproj*
 *.vs
+*x64
