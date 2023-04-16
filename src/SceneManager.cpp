@@ -1,5 +1,7 @@
 #include "SceneManager.h"
 
+#include <DxLib.h>
+#include "ErrorProc.h"
 #include "Scene.h"
 
 bool SceneManager::init() {
@@ -25,8 +27,21 @@ void SceneManager::allSceneClear() {
 	}
 }
 
-void SceneManager::changeScene(std::string sceneName) {
-	_scenes.push(_sceneCreate[sceneName]->createScene());
+void SceneManager::changeScene(std::string sceneName, bool isBack, bool isStack) {
+	if (isBack) {
+		_scenes.top()->end();
+		_scenes.pop();
+	}
 
-	printf("Create Scene");
+	if (!isStack) {
+		allSceneClear();
+	}
+
+	auto it = _sceneCreate.find(sceneName);
+	if (_sceneCreate.end() == it) {
+		ErrorExit("error scene exist.");
+	}
+
+	_scenes.push(_sceneCreate[sceneName]->createScene());
+	if (!_scenes.top()->init())ErrorExit("error scene exist.");
 }

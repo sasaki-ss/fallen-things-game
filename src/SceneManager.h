@@ -20,7 +20,7 @@ public:
 	void update();
 	void draw();
 
-	void changeScene(std::string sceneName);
+	void changeScene(std::string sceneName, bool isBack = false, bool isStack = false);
 	
 
 	void setSceneCreate(std::string sceneName, ISceneCreate* sceneCreate) {
