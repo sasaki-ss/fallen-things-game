@@ -3,6 +3,7 @@
 #include <DxLib.h>
 #include "ErrorProc.h"
 #include "SceneManager.h"
+#include "Fps.h"
 
 bool System::init() {
 	//FreeConsole();
@@ -20,6 +21,9 @@ bool System::init() {
 	if (DxLib_Init())return false;							//DXライブラリを初期化
 	SetDrawScreen(DX_SCREEN_BACK);							//裏画面処理を設定
 
+	_fps = new Fps();
+	_fps->init();
+
 	return true;
 }
 
@@ -28,15 +32,21 @@ void System::run() {
 		//画面をクリア
 		ClearDrawScreen();
 
+		_fps->update();
+
 		_sceneMgr->update();
 		_sceneMgr->draw();
 
 		//裏画面を反映させる
 		ScreenFlip();
+
+		_fps->wait();
 	}
 }
 
 void System::end() {
+	delete _fps;
+	delete _sceneMgr;
 	DxLib_End();
 }
 

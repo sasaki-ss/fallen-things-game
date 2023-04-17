@@ -6,12 +6,14 @@
 #include "Vector2.h"
 
 class SceneManager;
+class Fps;
 
 class System final {
 private:
 	Vector2 _windowPos;
 	std::string _windowTitle;
 	SceneManager* _sceneMgr;
+	Fps* _fps;
 public:
 	bool init();
 	void run();
