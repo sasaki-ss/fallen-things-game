@@ -1,37 +1,36 @@
-#include "DropItem.h"
+#include "AqItem.h"
 
 #include <DxLib.h>
 
-DropItem::DropItem(Vector2 pos) :
-	GameObject(pos),
-	_dropSpeed() {
+AqItem::AqItem(Vector2 pos) :
+	Item(pos),
+	_fallSpped() {
 
 }
 
-DropItem::~DropItem() {
+AqItem::~AqItem() {
 
 }
 
-bool DropItem::init() {
+bool AqItem::init() {
 	_width = 32;
 	_height = 32;
-	_dropSpeed = 5.0f;
+	_fallSpped = 5.0f;
 	return true;
 }
 
-void DropItem::end() {
+void AqItem::end() {
 
 }
 
-void DropItem::update() {
+void AqItem::update() {
 	if (_pos.y < 600) {
-		_pos.y += _dropSpeed;
+		_pos.y += _fallSpped;
 	}
 }
 
-void DropItem::draw() {
+void AqItem::draw() {
 	DrawBoxAA(_pos.x - (_width / 2), _pos.y - (_height / 2),
 		_pos.x + (_width / 2), _pos.y + (_height / 2), GetColor(125, 125, 125), TRUE);
 	DrawCircle(_pos.x, _pos.y, 2, GetColor(255, 0, 0), TRUE);
-
 }
