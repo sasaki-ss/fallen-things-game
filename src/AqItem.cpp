@@ -2,8 +2,8 @@
 
 #include <DxLib.h>
 
-AqItem::AqItem(Vector2 pos) :
-	Item(pos),
+AqItem::AqItem(Vector2 pos, Component* comp) :
+	Item(pos, comp),
 	_fallSpped() {
 
 }

@@ -3,9 +3,11 @@
 
 #include "ISceneCreate.h"
 
+struct Component;
+
 class InGameCreate final : public ISceneCreate {
 public:
-	Scene* createScene();
+	Scene* createScene(Component* comp);
 };
 
 #endif // !G_INGAMECREATE_H

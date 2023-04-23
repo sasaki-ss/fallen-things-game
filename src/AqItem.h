@@ -7,7 +7,7 @@ class AqItem final : public Item {
 private:
 	float _fallSpped;
 public:
-	AqItem(Vector2 pos);
+	AqItem(Vector2 pos, Component* comp);
 	~AqItem();
 	bool init();
 	void end();

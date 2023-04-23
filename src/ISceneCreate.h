@@ -4,10 +4,11 @@
 #include <string>
 
 class Scene;
+struct Component;
 
 __interface ISceneCreate {
 public:
-	Scene* createScene();
+	Scene* createScene(Component* comp);
 };
 
 #endif // !ISCENECREATE_H

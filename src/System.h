@@ -4,6 +4,7 @@
 #include <string>
 #include "ISceneCreate.h"
 #include "Vector2.h"
+#include "Component.h"
 
 class SceneManager;
 class Fps;
@@ -14,6 +15,8 @@ private:
 	std::string _windowTitle;
 	SceneManager* _sceneMgr;
 	Fps* _fps;
+
+	Component _comp;
 public:
 	bool init();
 	void run();

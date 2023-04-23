@@ -9,8 +9,9 @@ class Item;
 class ItemManager final :public Object {
 private:
 	std::vector<Item*> _items;
+	int _next;
 public:
-	ItemManager();
+	ItemManager(Component* comp);
 	~ItemManager();
 	bool init();
 	void end();

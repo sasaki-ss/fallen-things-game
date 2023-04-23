@@ -1,6 +1,5 @@
 #include "SceneManager.h"
 
-#include <DxLib.h>
 #include "ErrorProc.h"
 #include "Scene.h"
 
@@ -42,6 +41,6 @@ void SceneManager::changeScene(std::string sceneName, bool isBack, bool isStack)
 		ErrorProc::ErrorExit("error scene exist.");
 	}
 
-	_scenes.push(_sceneCreate[sceneName]->createScene());
+	_scenes.push(_sceneCreate[sceneName]->createScene(_comp));
 	if (!_scenes.top()->init())ErrorProc::ErrorExit("error scene exist.");
 }

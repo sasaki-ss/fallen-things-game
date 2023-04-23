@@ -1,6 +1,7 @@
 #include "GameObject.h"
 
-GameObject::GameObject() :
+GameObject::GameObject(Component* comp) :
+	Object(comp),
 	_pos(),
 	_width(),
 	_height(),
@@ -8,7 +9,8 @@ GameObject::GameObject() :
 
 }
 
-GameObject::GameObject(Vector2 pos) :
+GameObject::GameObject(Vector2 pos, Component* comp) :
+	Object(comp),
 	_pos(pos),
 	_width(),
 	_height(),

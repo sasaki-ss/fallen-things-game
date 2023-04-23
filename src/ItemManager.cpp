@@ -1,10 +1,17 @@
 #include "ItemManager.h"
 
+#include "AqItem.h"
+#include "Component.h"
 #include "Define.h"
 #include "Item.h"
 
+#include <DxLib.h>
+
 /*コンストラクタ*/
-ItemManager::ItemManager() {
+ItemManager::ItemManager(Component* comp) :
+	Object(comp),
+	_next() {
+
 
 }
 
@@ -17,6 +24,10 @@ ItemManager::~ItemManager() {
 bool ItemManager::init() {
 	_items.reserve(MAX_DROP_ITEM);
 	for (int i = 0; i < MAX_DROP_ITEM; ++i)_items.emplace_back(nullptr);
+	_next = 0;
+
+	_items[_next] = new AqItem(Vector2(200, 0), _comp);
+	_items[_next]->init();
 
 	return false;
 }
@@ -35,6 +46,22 @@ void ItemManager::end() {
 
 /*更新処理*/
 void ItemManager::update() {
+	//ここに生成処理
+
+	DrawFormatString(0, 25, GetColor(255, 255, 255), "%d", _comp->rand() % 10);
+
+	//生成処理
+	_items[_next] = new AqItem(Vector2(200, 0), _comp);
+	_items[_next]->init();
+	
+	//アイテム生成後に実行する
+	for (int i = 0; i < MAX_DROP_ITEM; ++i) {
+		if (_items[i] == nullptr) {
+			_next = i;
+			break;
+		}
+	}
+
 	for (auto item : _items) {
 		if (item != nullptr)item->update();
 	}

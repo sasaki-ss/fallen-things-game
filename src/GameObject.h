@@ -3,16 +3,18 @@
 
 #include "Vector2.h"
 
-class GameObject {
+#include "Object.h"
+
+class GameObject :public Object {
 protected:
 	Vector2 _pos;
 	float	_width;
 	float	_height;
 	bool	_isActive;
 public:
-	GameObject();
-	GameObject(Vector2 pos);
-	virtual ~GameObject(){}
+	GameObject(Component* comp);
+	GameObject(Vector2 pos, Component* comp);
+	virtual ~GameObject() {}
 	virtual bool init() = 0;
 	virtual void end() = 0;
 	virtual void update() = 0;

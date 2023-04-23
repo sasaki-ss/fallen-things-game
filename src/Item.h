@@ -7,8 +7,16 @@ class Item : public GameObject {
 private:
 
 public:
-	Item(){}
-	Item(Vector2 pos){}
+	Item(Component* comp) :
+		GameObject(comp) {
+
+	}
+
+	Item(Vector2 pos, Component* comp) :
+		GameObject(pos, comp) {
+
+	}
+
 	virtual ~Item() {}
 	virtual bool init() = 0;
 	virtual void end() = 0;

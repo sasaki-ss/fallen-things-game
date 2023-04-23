@@ -2,8 +2,8 @@
 
 #include <DxLib.h>
 #include "ErrorProc.h"
-#include "SceneManager.h"
 #include "Fps.h"
+#include "SceneManager.h"
 
 bool System::init() {
 	//FreeConsole();
@@ -20,6 +20,9 @@ bool System::init() {
 	SetDrawMode(DX_DRAWMODE_NEAREST);						//ネアレストネイバー法で描画する
 	if (DxLib_Init())return false;							//DXライブラリを初期化
 	SetDrawScreen(DX_SCREEN_BACK);							//裏画面処理を設定
+	
+	std::random_device rnd;
+	_comp.rand.seed(rnd());
 
 	_fps = new Fps();
 	_fps->init();
@@ -52,6 +55,7 @@ void System::end() {
 
 void System::setSceneSystem(std::string defSceneName, ISceneCreate* defSceneCreate) {
 	_sceneMgr = new SceneManager();
+	_sceneMgr->setComponent(&_comp);
 	setSceneCreate(defSceneName, defSceneCreate);
 	_sceneMgr->changeScene(defSceneName);
 	if (!_sceneMgr->init())ErrorProc::ErrorExit("Initialization of SceneManager failed.");
