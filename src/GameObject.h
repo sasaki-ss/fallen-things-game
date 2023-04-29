@@ -19,6 +19,9 @@ public:
 	virtual void end() = 0;
 	virtual void update() = 0;
 	virtual void draw() = 0;
+
+	bool getIsActive() { return _isActive; }
+	Vector2 getPos() { return _pos; }
 };
 
 #endif // !G_GAMEOBJECT_H

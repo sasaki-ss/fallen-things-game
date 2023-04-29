@@ -10,6 +10,11 @@ class ItemManager final :public Object {
 private:
 	std::vector<Item*> _items;
 	int _next;
+	int _cnt;
+	bool _isEmp;
+	bool _isGen;
+
+	void GenItem();
 public:
 	ItemManager(Component* comp);
 	~ItemManager();
