@@ -3,6 +3,7 @@
 #include <DxLib.h>
 #include "ErrorProc.h"
 #include "Fps.h"
+#include "Keyboard.h"
 #include "SceneManager.h"
 
 bool System::init() {
@@ -23,9 +24,11 @@ bool System::init() {
 	
 	std::random_device rnd;
 	_comp.rand.seed(rnd());
-
+	_comp.keyboard = std::make_unique<Keyboard>(&_comp);
 	_fps = new Fps();
+
 	_fps->init();
+	_comp.keyboard->init();
 
 	return true;
 }
@@ -36,9 +39,10 @@ void System::run() {
 		ClearDrawScreen();
 
 		_fps->update();
+		_comp.keyboard->update();
 
-		_sceneMgr->update();
-		_sceneMgr->draw();
+		_comp.sceneMgr->update();
+		_comp.sceneMgr->draw();
 
 		//— ‰æ–Ê‚ð”½‰f‚³‚¹‚é
 		ScreenFlip();
@@ -54,13 +58,15 @@ void System::end() {
 }
 
 void System::setSceneSystem(std::string defSceneName, ISceneCreate* defSceneCreate) {
-	_sceneMgr = new SceneManager();
-	_sceneMgr->setComponent(&_comp);
+	_comp.sceneMgr = std::make_unique<SceneManager>(&_comp);
 	setSceneCreate(defSceneName, defSceneCreate);
-	_sceneMgr->changeScene(defSceneName);
-	if (!_sceneMgr->init())ErrorProc::ErrorExit("Initialization of SceneManager failed.");
+	_comp.sceneMgr->changeScene(defSceneName);
+
+	if (!_comp.sceneMgr->init()) {
+		ErrorProc::ErrorExit("Initialization of SceneManager failed.");
+	}
 }
 
 void System::setSceneCreate(std::string sceneName, ISceneCreate* sceneCreate) {
-	_sceneMgr->setSceneCreate(sceneName, sceneCreate);
+	_comp.sceneMgr->setSceneCreate(sceneName, sceneCreate);
 }

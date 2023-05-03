@@ -4,31 +4,31 @@
 #include <unordered_map>
 #include <stack>
 #include <string>
+#include "Object.h"
 #include "ISceneCreate.h"
 
 class Scene;
 struct Component;
 
-class SceneManager final {
+class SceneManager final : public Object {
 private:
 	std::unordered_map<std::string, ISceneCreate*> _sceneCreate;
 	std::stack<Scene*> _scenes;
-	Component* _comp;
 
 	void allSceneClear();
 public:
+	SceneManager(Component* comp) :Object(comp){}
+	~SceneManager(){}
 	bool init();
 	void end();
 	void update();
 	void draw();
 
 	void changeScene(std::string sceneName, bool isBack = false, bool isStack = false);
-	
+
 	void setSceneCreate(std::string sceneName, ISceneCreate* sceneCreate) {
 		_sceneCreate[sceneName] = sceneCreate;
 	}
-
-	void setComponent(Component* comp) { _comp = comp; }
 };
 
 #endif // !G_SCENEMANAGER_H
