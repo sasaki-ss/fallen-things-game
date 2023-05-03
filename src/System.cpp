@@ -9,7 +9,7 @@ bool System::init() {
 	//FreeConsole();
 
 	SetOutApplicationLogValidFlag(FALSE);					//ログを出力しない
-	SetAlwaysRunFlag(FALSE);								//Windowがアクティブでない場合は実行しない
+	SetAlwaysRunFlag(TRUE);								//Windowがアクティブでない場合は実行しない
 	SetUseDXArchiveFlag(FALSE);								//DXアーカイブを使用しない
 	SetUse3DFlag(TRUE);										//3D機能を使用する
 	SetWaitVSyncFlag(FALSE);								//垂直同期待ちをしない
