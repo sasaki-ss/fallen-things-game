@@ -19,10 +19,10 @@ private:
 public:
 	ItemManager(Component* comp);
 	~ItemManager();
-	bool init();
-	void end();
-	void update();
-	void draw();
+	bool init()override;
+	void end()override;
+	void update()override;
+	void draw()override;
 };
 
 #endif // !G_ITEMMANAGER_H
