@@ -6,6 +6,7 @@
 #include "Object.h"
 
 class Item;
+class Player;
 
 class ItemManager final :public Object {
 private:
@@ -14,6 +15,8 @@ private:
 	int _cnt;
 	bool _isEmp;
 	bool _isGen;
+
+	Player* _player;
 
 	void GenItem();
 public:

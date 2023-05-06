@@ -1,11 +1,12 @@
 #include "ItemManager.h"
 
 #include "AqItem.h"
+#include "Collision.h"
 #include "Component.h"
 #include "Define.h"
 #include "Item.h"
+#include "Player.h"
 
-#include <DxLib.h>
 
 /*コンストラクタ*/
 ItemManager::ItemManager(Component* comp) :
@@ -34,6 +35,8 @@ bool ItemManager::init() {
 	_isEmp = true;
 	_isGen = false;
 
+	_player = _comp->getObj<Player>(OBJ_PLAYER);
+
 	return false;
 }
 
@@ -61,6 +64,7 @@ void ItemManager::update() {
 		}
 	}
 
+	//オブジェクトの生成処理
 	if (!_isGen) {
 		GenItem();
 	}
@@ -74,10 +78,18 @@ void ItemManager::update() {
 		}
 	}
 
+	Vector2 pPos = _player->getLeftTopPos();
+	float pWidth = _player->getWidth();
+	float pHeight = _player->getHeight();
+	//各オブジェクトの更新
 	for (int i = 0; i < MAX_DROP_ITEM; ++i) {
 		if (_items[i] == nullptr)continue;
 
 		_items[i]->update();
+		if (Collision::isHitBoxToBox(_items[i]->getLeftTopPos(), _items[i]->getWidth(),
+			_items[i]->getHeight(), pPos, pWidth, pHeight)) {
+			printf("Hit\n");
+		}
 	}
 }
 
