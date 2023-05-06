@@ -8,7 +8,6 @@ class Component;
 
 class Object {
 protected:
-	std::unordered_map<std::string, Object*> _objs;
 	Component* _comp;
 public:
 	Object(Component* comp) :
