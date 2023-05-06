@@ -17,7 +17,7 @@ public:
 	virtual ~Object() {}
 	virtual bool init() = 0;
 	virtual void end() = 0;
-	virtual void update() = 0;
+	virtual void update(){}
 	virtual void draw() {}
 };
 
