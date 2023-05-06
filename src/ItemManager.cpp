@@ -6,6 +6,7 @@
 #include "Define.h"
 #include "Item.h"
 #include "Player.h"
+#include "Score.h"
 
 
 /*コンストラクタ*/
@@ -14,7 +15,9 @@ ItemManager::ItemManager(Component* comp) :
 	_next(),
 	_cnt(),
 	_isEmp(true),
-	_isGen(true) {
+	_isGen(true),
+	_player(nullptr),
+	_score(nullptr) {
 
 }
 
@@ -36,6 +39,7 @@ bool ItemManager::init() {
 	_isGen = false;
 
 	_player = _comp->getObj<Player>(OBJ_PLAYER);
+	_score = _comp->getObj<Score>(OBJ_SCORE);
 
 	return false;
 }
@@ -88,7 +92,7 @@ void ItemManager::update() {
 		_items[i]->update();
 		if (Collision::isHitBoxToBox(_items[i]->getLeftTopPos(), _items[i]->getWidth(),
 			_items[i]->getHeight(), pPos, pWidth, pHeight)) {
-			printf("Hit\n");
+			_score->add(static_cast<AqItem*>(_items[i].get())->Acquisition());
 		}
 	}
 }
@@ -109,7 +113,7 @@ void ItemManager::GenItem() {
 	if (!_isEmp)return;
 
 	//アイテムを生成
-	_items[_next] = std::make_unique<AqItem>(Vector2(x, -50.0f), _comp);
+	_items[_next] = std::make_unique<AqItem>(Vector2(x, -50.0f), 100, _comp);
 	_items[_next]->init();
 	_isGen = true;
 

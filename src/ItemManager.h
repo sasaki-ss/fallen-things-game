@@ -7,6 +7,7 @@
 
 class Item;
 class Player;
+class Score;
 
 class ItemManager final :public Object {
 private:
@@ -17,6 +18,7 @@ private:
 	bool _isGen;
 
 	Player* _player;
+	Score*	_score;
 
 	void GenItem();
 public:
