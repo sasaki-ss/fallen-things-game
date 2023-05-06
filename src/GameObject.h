@@ -20,8 +20,11 @@ public:
 	virtual void update() = 0;
 	virtual void draw() = 0;
 
-	bool getIsActive() { return _isActive; }
 	Vector2 getPos() { return _pos; }
+	Vector2 getLeftTopPos() { return Vector2(_pos.x - (_width / 2), _pos.y - (_height / 2)); }
+	float getWidth() { return _width; }
+	float getHeight() { return _height; }
+	bool getIsActive() { return _isActive; }
 };
 
 #endif // !G_GAMEOBJECT_H
