@@ -1,19 +1,22 @@
 #ifndef G_INGAME_H
 #define G_INGAME_H
 
-#include "Scene.h"
+#include <memory>
 
-class ItemManager;
+#include "Scene.h"
+#include "Player.h"
+#include "ItemManager.h"
 
 class InGame final : public Scene {
 private:
-	ItemManager* _itemMgr;
+	std::unique_ptr<ItemManager>	_itemMgr;
+	std::unique_ptr<Player>			_player;
 public:
 	InGame(Component* comp);
-	bool init();
-	void end();
-	void update();
-	void draw();
+	bool init()override;
+	void end()override;
+	void update()override;
+	void draw()override;
 };
 
 #endif // !G_INGAME_H
