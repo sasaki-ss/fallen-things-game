@@ -5,14 +5,19 @@
 
 class AqItem final : public Item {
 private:
-	float _fallSpped;
+	int _score;
 public:
-	AqItem(Vector2 pos, Component* comp);
+	AqItem(Vector2 pos, int score, Component* comp);
 	~AqItem();
-	bool init();
-	void end();
-	void update();
-	void draw();
+	bool init()override;
+	void end()override;
+	void update()override;
+	void draw()override;
+
+	int Acquisition() {
+		_isActive = false;
+		return _score;
+	}
 };
 
 #endif // !G_AQITEM_H

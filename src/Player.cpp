@@ -42,4 +42,9 @@ void Player::draw() {
 	DrawBoxAA(_pos.x - (_width / 2), _pos.y - (_height / 2),
 		_pos.x + (_width / 2), _pos.y + (_height / 2), GetColor(125, 125, 125), TRUE);
 	DrawCircle(_pos.x, _pos.y, 2, GetColor(255, 0, 0), TRUE);
+
+	Vector2 v = getLeftTopPos();
+
+	DrawBoxAA(v.x, v.y,
+		v.x + _width, v.y + _height, GetColor(255, 0, 0), FALSE);
 }
