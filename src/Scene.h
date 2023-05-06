@@ -1,7 +1,7 @@
 #ifndef G_SCENE_H
 #define G_SCENE_H
 
-struct Component;
+class Component;
 
 class Scene {
 protected:

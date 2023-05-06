@@ -92,7 +92,7 @@ void ItemManager::draw() {
 
 /*¶¬ˆ—*/
 void ItemManager::GenItem() {
-	float x = (_comp->rand() % 8 + 1) * 100.0f;
+	float x = (_comp->getRand() % 8 + 1) * 100.0f;
 
 	if (!_isEmp)return;
 

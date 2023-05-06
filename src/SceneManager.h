@@ -8,7 +8,6 @@
 #include "ISceneCreate.h"
 
 class Scene;
-struct Component;
 
 class SceneManager final : public Object {
 private:

@@ -4,7 +4,7 @@
 #include <string>
 
 class Scene;
-struct Component;
+class Component;
 
 __interface ISceneCreate {
 public:

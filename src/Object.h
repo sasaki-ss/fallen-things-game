@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 
-struct Component;
+class Component;
 
 class Object {
 protected:

@@ -3,7 +3,7 @@
 
 #include "ISceneCreate.h"
 
-struct Component;
+class Component;
 
 class InGameCreate final : public ISceneCreate {
 public:
