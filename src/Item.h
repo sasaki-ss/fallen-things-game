@@ -4,16 +4,18 @@
 #include "GameObject.h"
 
 class Item : public GameObject {
-private:
-
+protected:
+	float _fallSpped;
 public:
 	Item(Component* comp) :
-		GameObject(comp) {
+		GameObject(comp),
+		_fallSpped(0.0f) {
 
 	}
 
 	Item(Vector2 pos, Component* comp) :
-		GameObject(pos, comp) {
+		GameObject(pos, comp),
+		_fallSpped(0.0f) {
 
 	}
 
