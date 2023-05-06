@@ -1,6 +1,6 @@
 #include "InGameCreate.h"
 #include "InGame.h"
 
-Scene* InGameCreate::createScene() {
-	return new InGame();
+Scene* InGameCreate::createScene(Component* comp) {
+	return new InGame(comp);
 }

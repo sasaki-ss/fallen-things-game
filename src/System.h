@@ -4,14 +4,19 @@
 #include <string>
 #include "ISceneCreate.h"
 #include "Vector2.h"
+#include "Component.h"
 
-class SceneManager;
+class Fps;
 
 class System final {
 private:
-	Vector2 _windowPos;
+	Vector2		_windowPos;
 	std::string _windowTitle;
-	SceneManager* _sceneMgr;
+	Fps*		_fps;
+
+	Component		_comp;
+	Keyboard*		_keyboard;
+	SceneManager*	_sceneMgr;
 public:
 	bool init();
 	void run();
