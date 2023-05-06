@@ -38,7 +38,7 @@ void SceneManager::changeScene(std::string sceneName, bool isBack, bool isStack)
 
 	auto it = _sceneCreate.find(sceneName);
 	if (_sceneCreate.end() == it) {
-		ErrorProc::ErrorExit("error scene exist.");
+		ErrorProc::ErrorExit("Scene generation class is not registered.");
 	}
 
 	_scenes.push(_sceneCreate[sceneName]->createScene(_comp));
