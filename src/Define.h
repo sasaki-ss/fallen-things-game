@@ -14,5 +14,6 @@ static const std::string OBJ_SCENEMANGER = "SceneManager";
 
 static const std::string OBJ_PLAYER = "Player";
 static const std::string OBJ_ITEMMGR = "ItemManager";
+static const std::string OBJ_SCORE = "Score";
 
 #endif // !G_DEFINE_H
