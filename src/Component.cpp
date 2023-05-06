@@ -5,7 +5,7 @@ Component::Component() {
 }
 
 Component::~Component() {
-
+	_objs.clear();
 }
 
 /*‰Šú‰»ˆ—*/
