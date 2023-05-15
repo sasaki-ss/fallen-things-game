@@ -56,8 +56,9 @@ void System::end() {
 	DxLib_End();
 }
 
-void System::setSceneSystem(std::string defSceneName, ISceneCreate* defSceneCreate) {
-	setSceneCreate(defSceneName, defSceneCreate);
+void System::setSceneSystem(std::string defSceneName,
+	std::unique_ptr<ISceneCreate> defSceneCreate) {
+	setSceneCreate(defSceneName, move(defSceneCreate));
 	_sceneMgr->changeScene(defSceneName);
 
 	if (!_sceneMgr->init()) {
@@ -65,6 +66,7 @@ void System::setSceneSystem(std::string defSceneName, ISceneCreate* defSceneCrea
 	}
 }
 
-void System::setSceneCreate(std::string sceneName, ISceneCreate* sceneCreate) {
-	_sceneMgr->setSceneCreate(sceneName, sceneCreate);
+void System::setSceneCreate(std::string sceneName,
+	std::unique_ptr<ISceneCreate> sceneCreate) {
+	_sceneMgr->setSceneCreate(sceneName, move(sceneCreate));
 }

@@ -1,9 +1,10 @@
 #ifndef G_SCENEMANAGER_H
 #define G_SCENEMANAGER_H
 
-#include <unordered_map>
+#include <memory>
 #include <stack>
 #include <string>
+#include <unordered_map>
 #include "Object.h"
 #include "ISceneCreate.h"
 
@@ -11,7 +12,7 @@ class Scene;
 
 class SceneManager final : public Object {
 private:
-	std::unordered_map<std::string, ISceneCreate*> _sceneCreate;
+	std::unordered_map<std::string, std::unique_ptr<ISceneCreate>> _sceneCreate;
 	std::stack<Scene*> _scenes;
 
 	void allSceneClear();
@@ -25,8 +26,8 @@ public:
 
 	void changeScene(std::string sceneName, bool isBack = false, bool isStack = false);
 
-	void setSceneCreate(std::string sceneName, ISceneCreate* sceneCreate) {
-		_sceneCreate[sceneName] = sceneCreate;
+	void setSceneCreate(std::string sceneName, std::unique_ptr<ISceneCreate> sceneCreate) {
+		_sceneCreate[sceneName] = move(sceneCreate);
 	}
 };
 

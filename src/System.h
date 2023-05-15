@@ -24,8 +24,10 @@ public:
 
 	void setWindowPos(Vector2 pos) { _windowPos = pos; }
 	void setWindowTitle(std::string name) { _windowTitle = name; }
-	void setSceneSystem(std::string defSceneName, ISceneCreate* defSceneCreate);
-	void setSceneCreate(std::string sceneName, ISceneCreate* sceneCreate);
+	void setSceneSystem(std::string defSceneName,
+		std::unique_ptr<ISceneCreate> defSceneCreate);
+	void setSceneCreate(std::string sceneName,
+		std::unique_ptr<ISceneCreate> sceneCreate);
 };
 
 #endif // !G_SYSTEM_H
