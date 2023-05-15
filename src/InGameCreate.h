@@ -4,8 +4,6 @@
 #include "ISceneCreate.h"
 #include "InGame.h"
 
-class Component;
-
 class InGameCreate final : public ISceneCreate {
 public:
 	Scene* createScene(Component* comp){ return new InGame(comp); }

@@ -4,8 +4,6 @@
 #include "ISceneCreate.h"
 #include "Title.h"
 
-class Component;
-
 class TitleCreate final : public ISceneCreate {
 public:
 	Scene* createScene(Component* comp) { return new Title(comp); }
