@@ -6,6 +6,13 @@
 #include "Keyboard.h"
 #include "SceneManager.h"
 
+System::System():
+	_fps(nullptr),
+	_kb(nullptr),
+	_sceneMgr(nullptr){
+
+}
+
 bool System::init() {
 	//FreeConsole();
 
@@ -25,7 +32,7 @@ bool System::init() {
 	_comp.init();
 	
 	_fps = new Fps();
-	_keyboard = _comp.getKeyboard();
+	_kb = _comp.getKeyboard();
 	_sceneMgr = _comp.getSceneMgr();
 
 	_fps->init();
@@ -39,7 +46,7 @@ void System::run() {
 		ClearDrawScreen();
 
 		_fps->update();
-		_keyboard->update();
+		_kb->update();
 
 		_sceneMgr->update();
 		_sceneMgr->draw();

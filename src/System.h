@@ -15,9 +15,10 @@ private:
 	Fps*		_fps;
 
 	Component		_comp;
-	Keyboard*		_keyboard;
+	Keyboard*		_kb;
 	SceneManager*	_sceneMgr;
 public:
+	System();
 	bool init();
 	void run();
 	void end();
