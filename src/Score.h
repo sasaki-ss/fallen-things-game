@@ -3,7 +3,7 @@
 
 #include "Object.h"
 
-class Score : public Object {
+class Score final : public Object {
 private:
 	int _score;
 public:

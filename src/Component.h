@@ -8,7 +8,7 @@
 #include "Keyboard.h"
 #include "SceneManager.h"
 
-class Component {
+class Component final {
 private:
 	std::mt19937 _rand;
 	std::unique_ptr<Keyboard> _keyboard;
