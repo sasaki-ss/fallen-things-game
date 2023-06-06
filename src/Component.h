@@ -12,9 +12,6 @@
 class Component final {
 private:
 	std::mt19937 _rand;
-	std::unique_ptr<Image>						_image;
-	std::unique_ptr<Keyboard>					_keyboard;
-	std::unique_ptr<SceneManager>				_sceneMgr;
 	std::unordered_map<std::string, Object*>	_objs;
 public:
 	Component();
@@ -27,9 +24,6 @@ public:
 	void setObj(std::string objName, Object* obj) { _objs[objName] = obj; }
 	
 	unsigned int getRand() { return _rand(); }
-	Image* getImage() { return _image.get(); }
-	Keyboard* getKeyboard() { return _keyboard.get(); }
-	SceneManager* getSceneMgr() { return _sceneMgr.get(); }
 
 	template <class T>
 	T* getObj(std::string objName) {

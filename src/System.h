@@ -1,10 +1,15 @@
 #ifndef G_SYSTEM_H
 #define G_SYSTEM_H
 
+#include <memory>
 #include <string>
-#include "ISceneCreate.h"
-#include "Vector2.h"
 #include "Component.h"
+#include "Image.h"
+#include "ISceneCreate.h"
+#include "Keyboard.h"
+#include "SceneManager.h"
+#include "Vector2.h"
+
 
 class Fps;
 
@@ -15,13 +20,21 @@ private:
 	Fps*		_fps;
 
 	Component		_comp;
-	Keyboard*		_kb;
-	SceneManager*	_sceneMgr;
+
+	//std::unique_ptr<Image>						_image;
+	//std::unique_ptr<Keyboard>					_keyboard;
+	//std::unique_ptr<SceneManager>				_sceneMgr;
+
+	std::unique_ptr<Image>			_image;
+	std::unique_ptr<Keyboard>		_keyboard;
+	std::unique_ptr<SceneManager>	_sceneMgr;
 public:
 	System();
 	bool init();
 	void run();
 	void end();
+
+	void loadImage(std::string filePath);
 
 	void setWindowPos(Vector2 pos) { _windowPos = pos; }
 	void setWindowTitle(std::string name) { _windowTitle = name; }

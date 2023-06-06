@@ -1,15 +1,14 @@
 #include "System.h"
 
 #include <DxLib.h>
+#include "Define.h"
 #include "ErrorProc.h"
 #include "Fps.h"
 #include "Keyboard.h"
 #include "SceneManager.h"
 
-System::System():
-	_fps(nullptr),
-	_kb(nullptr),
-	_sceneMgr(nullptr){
+System::System() :
+	_fps(nullptr) {
 
 }
 
@@ -32,8 +31,17 @@ bool System::init() {
 	_comp.init();
 	
 	_fps = new Fps();
-	_kb = _comp.getKeyboard();
-	_sceneMgr = _comp.getSceneMgr();
+	_image = std::make_unique<Image>();
+	_keyboard = std::make_unique<Keyboard>(&_comp);
+	_sceneMgr = std::make_unique<SceneManager>(&_comp);
+
+	_comp.setObj(OBJ_IMAGE, _image.get());
+	_comp.setObj(OBJ_KEYBOARD, _keyboard.get());
+	_comp.setObj(OBJ_SCENEMANGER, _sceneMgr.get());
+
+	_image->init();
+	_keyboard->init();
+	_sceneMgr->init();
 
 	_fps->init();
 
@@ -46,7 +54,7 @@ void System::run() {
 		ClearDrawScreen();
 
 		_fps->update();
-		_kb->update();
+		_keyboard->update();
 
 		_sceneMgr->update();
 		_sceneMgr->draw();
@@ -59,8 +67,16 @@ void System::run() {
 }
 
 void System::end() {
+	_image->end();
+	_keyboard->end();
+	_sceneMgr->end();
 	delete _fps;
 	DxLib_End();
+}
+
+void System::loadImage(std::string filePath) {
+	_image->setFilePath(filePath);
+	_image->load();
 }
 
 void System::setSceneSystem(std::string defSceneName,
