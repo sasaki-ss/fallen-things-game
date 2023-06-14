@@ -10,6 +10,11 @@ class Object {
 protected:
 	Component* _comp;
 public:
+	Object() :
+		_comp(nullptr) {
+
+	}
+
 	Object(Component* comp) :
 		_comp(comp) {
 
