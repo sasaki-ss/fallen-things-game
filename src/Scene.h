@@ -1,21 +1,19 @@
 #ifndef G_SCENE_H
 #define G_SCENE_H
 
-class Component;
+#include "Object.h"
 
-class Scene {
-protected:
-	Component* _comp;
+class Scene : public Object {
 public:
 	Scene(Component* comp) :
-		_comp(comp) {
+		Object(comp) {
 
 	}
 
-	virtual bool init() = 0;
-	virtual void end() = 0;
-	virtual void update() = 0;
-	virtual void draw() = 0;
+	virtual bool init()override = 0;
+	virtual void end()override = 0;
+	virtual void update()override = 0;
+	virtual void draw()override = 0;
 };
 
 #endif // !G_SCENE_H
