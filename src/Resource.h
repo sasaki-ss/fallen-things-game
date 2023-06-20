@@ -4,23 +4,16 @@
 #include <string>
 #include "Object.h"
 
-enum class ResourceType {
-	Temp,
-	Permanence
-};
-
 class Resource : public Object {
 protected:
-	std::string _targetFilePath;
-	std::string _targetFileName;
 public:
 	Resource();
 	bool init()override { return true; }
 	void end()override = 0;
-	virtual bool load(ResourceType type) = 0;
+	virtual bool load(std::string folderPath) = 0;
 
-	void setFilePath(const std::string& targetFilePath);
-	void getFilePaths(std::vector<std::string>& targetFilePaths);
+	void getFileNames(const std::string folderPath,
+		std::vector<std::string>& targetFileNames);
 };
 
 #endif // !G_RESOURCE_H

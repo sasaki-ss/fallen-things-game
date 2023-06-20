@@ -9,38 +9,37 @@ Image::Image() :
 }
 
 void Image::end() {
-	for (const auto& image : _images) {
-		DeleteGraph(image.second.handle);
-	}
+	InitGraph();
 	_images.clear();
 }
 
-bool Image::load(ResourceType type) {
-	std::vector<std::string> filePaths;
+bool Image::load(std::string folderPath) {
+	std::vector<std::string> fileNames;
 
-	getFilePaths(filePaths);
-
-	for (const auto& filePath : filePaths) {
-		int imageHandle = LoadGraph(filePath.c_str());
-		if (imageHandle == -1) {
+	getFileNames(folderPath, fileNames);
+	for (const auto& fileName : fileNames) {
+		std::string path = folderPath + "/" + fileName;
+		int imgHandle = LoadGraph(path.c_str());
+		if (imgHandle == -1) {
 			return false;
 		}
 
-		std::string fileName = filePath.substr(filePath.find(_targetFileName) +
-			_targetFileName.length()).c_str();
-		ImageData imageData;
-		imageData.handle = imageHandle;
-		imageData.type = type;
-		_images.emplace(std::move(fileName), std::move(imageData));
+		_images.emplace(fileName, std::move(imgHandle));
 	}
 
-	filePaths.clear();
-
+	fileNames.clear();
 	return true;
 }
 
-void Image::DrawRotaGraph(Vector2 pos, Vector2 cPos, double angle, std::string fileName,
+void Image::DrawRotaGraph(Vector2 pos, Vector2 cPos, std::string fileName, double angle,
 	double extRateX, double extRateY, int trastFlag, int turnFlagX, int turnFlagY) {
 	DrawRotaGraph3F(pos.x, pos.y, cPos.x, cPos.y, extRateX, extRateY, angle,
-		_images[fileName].handle, trastFlag, turnFlagX, turnFlagY);
+		_images[fileName], trastFlag, turnFlagX, turnFlagY);
+}
+
+void Image::DrawRectRotaGraph(Vector2 pos,Vector2 src,int width,int height,
+	Vector2 cPos,std::string fileName,double angle,double extRateX,double extRateY,
+	int trastFlag, int turnFlagX, int turnFlagY) {
+	DrawRectRotaGraph3F(pos.x, pos.y, (int)src.x, (int)src.y, width, height, cPos.x, cPos.y,
+		extRateX, extRateY, angle, _images[fileName], trastFlag, turnFlagX, turnFlagY);
 }
